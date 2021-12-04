@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Ingrese un año y abra la consola para ver la llamada a la api</h1>
+      Año:
+      <input size="4" maxlength="4" name="year" id="year" placeholder="2012" />
+      <button onclick="getMovieList(document.getElementById('year').value)">
+        Buscar
+      </button>
+    </div>
+
+    <script>
+      async function getMovieList(year) {
+        const url = `https://jsonmock.hackerrank.com/api/movies?Year=${year}`;
+        console.clear();
+        await fetch(url)
+          .then((data) => data.json())
+          .then((res) => {
+            res.data.map((movieObj) => {
+              return console.log(movieObj.Title);
+            });
+          })
+          .catch((err) => err);
+      }
+    </script>
+  </body>
+</html>
